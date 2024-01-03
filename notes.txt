@@ -1,0 +1,111 @@
+# football
+ <script>
+        // for debug on unavailable mobile devices
+        window.addEventListener("error", handleError, true);
+        function handleError(evt) {
+            // if (evt.message) { // Chrome sometimes provides this
+            //     alert("error: " + evt.message + " at linenumber: " + evt.lineno + " of file: " + evt.filename);
+            // } else {
+            //     alert("error: " + evt.type + " from element: " + (evt.srcElement || evt.target));
+            // }
+        }
+
+        // make game full screen on mobile. disabled for now...
+        // if (!screenfull.isEnabled) {
+        //     // return false;
+        // } //TODO...use full screen icon here
+        $('#play').click(function () {
+            if (document.webkitFullscreenElement) {
+                // document.webkitCancelFullScreen();
+            }
+            else {
+                // document.getElementById('stage').webkitRequestFullScreen();
+            };
+            // screenfull.request(document.getElementById('stage'));
+        });
+    </script>
+
+if we want to add new club or change existing double click add-players.html and open it in a local browser
+<!-- 
+    TODO LIST:
+                IMPORTANT: FOR PVP!
+                yellow cards are on random - make them same  for both players
+                link no moves to get grid from host player.
+                clear backend on conenction close or game finished
+
+                REMOVE ALL CDN - USE NPM!!
+                add autoplay - DONE
+                add usage for players' exp points
+                add players' price
+                make name generator
+    -->
+
+<!--       
+    INFO!!!!!!!!!
+        BALL COLORS:  
+               RED: ' config.defaultBlockColors.red'
+               BLUE: '3052FF'
+               GREEN: '2F7F07'
+               YELLOW: 'E2D841'
+               ORANGE 'FF9702'   //removed
+               PURPLE: 'B200FF'
+        
+  
+<!--    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    https://www.youtube.com/watch?v=LOeioOKUKI8     - firebase nose -express server tutorial!!!!!!!-->  this.cardImg.filters = [new GlowFilter({
+            distance: 25,
+            outerStrength: 5,
+            innerStrength: 0,
+            color: 0xffffff,
+            quality: 1,
+            knockout: false,
+        })]
+
+
+old-----------------------------------------------------------------
+                                total  avrg               total
+man city                         466  -25.88               6
+bayern                           488  -27.10               5
+real madrid                      478  -26.55               6
+roma                             546  -30.33               4
+inter                            513  -28.50               5
+Atlético                         530  -29.44               4 
+rangers                          575  -31.94               3
+dortmund                         532  -29.55               4
+Feyenoord                        548  -30.44               4
+Beşiktaş                         571  -31.72               3 
+PAOK FC                          588  -32.66               3
+ludogorets                       597  -33.16               2
+
+
+-----------------------------------------------------------------
+
+7 - 190m+        = 17(points for atk/def)
+    175m- 189m   = 18
+    150m- 174m   = 19
+    135m- 149m   = 20
+    120m- 134m   = 21
+    105m- 119m   = 22
+    90m - 104m   = 23
+    75m - 89m    = 24              
+    60m - 74m    = 25 
+6 - 50m - 59m    = 26
+    40m - 49m    = 27
+5 - 30m - 39m    = 28
+    20m - 29m    = 29
+4 - 12m - 19m    = 30
+     5m - 11m    = 31
+3 -  3m -  5m    = 32
+     1m -  2.99m = 33
+2 - 0.5m-0.99m   = 34
+    0.1m-0.49m   = 35
+1 -  <0.1m       = 36
+
+ (est. atk/def)
+goalkeepers -  80%/20%
+defenders   -  65%/35%
+midfielders -  50%/50%
+forwards    -  35%/65%
+
+DONE:
+man city      
