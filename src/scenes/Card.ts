@@ -1,12 +1,13 @@
-import { IScene, App } from "../App";
-import { Container, Sprite, Graphics, Loader, Text, TextStyle, Texture, ParticleContainer } from "pixi.js";
-import { Emitter, EmitterConfig } from "pixi-particles";
+import { Container, Sprite, Texture } from "pixi.js";
 import gsap from "gsap";
+import { config } from "../MainGameConfig";
 
 export class Card extends Container {
 
     public card: Sprite;
     public state: string = "hidden";
+    public type: string = "";
+    public isOpen: boolean = false;
 
     constructor() {
         super();
@@ -26,18 +27,19 @@ export class Card extends Container {
         this.card.buttonMode = true;
     }
 
-    public flip(): void {
+    public flip(type: string): void {
+        this.type = type;
         let startScale = this.card.scale.x;
         let startedFlippling = false;
 
-        let flipTween = gsap.to(this.card.scale, 0.2,
+        let flipTween = gsap.to(this.card.scale, config.cardFlipDuration,
             {
                 x: startScale * -1,
                 ease: "linear",
                 onUpdate: () => {
                     if (flipTween.progress() > 0.4 && !startedFlippling) {
                         startedFlippling = true;
-                        this.card.texture = Texture.from( this.state === "hidden" ? "cardBack" : "ace");
+                        this.card.texture = Texture.from(this.state === "hidden" ? "cardBack" : type);
                     }
                 },
                 onComplete: () => { },

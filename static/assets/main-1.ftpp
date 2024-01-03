@@ -2,16 +2,21 @@
   "meta": {
     "version": "0.6.7"
   },
-  "savePath": "C:\\Users\\yosif\\OneDrive\\Desktop\\find-pairs\\static\\assets",
+  "savePath": "C:\\projects\\sideProjects-educational\\find-pairs\\static\\assets",
   "images": [
     {
+      "name": "K.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/K.png",
+      "folder": ""
+    },
+    {
       "name": "ace.png",
-      "path": "C:/Users/yosif/OneDrive/Desktop/ace.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/ace.png",
       "folder": ""
     },
     {
       "name": "cardBack.png",
-      "path": "C:/Users/yosif/OneDrive/Desktop/find-pairs/images/main-1/cardBack.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/cardBack.png",
       "folder": ""
     }
   ],
@@ -28,7 +33,7 @@
     "filter": "none",
     "exporter": "JSON (hash)",
     "fileName": "pack-result",
-    "savePath": "C:\\Users\\yosif\\OneDrive\\Desktop\\find-pairs\\static\\assets",
+    "savePath": "C:\\projects\\sideProjects-educational\\find-pairs\\static\\assets",
     "width": 2048,
     "height": 2048,
     "fixedSize": false,
