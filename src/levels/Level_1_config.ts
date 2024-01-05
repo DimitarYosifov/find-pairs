@@ -11,11 +11,15 @@ export const lvl1 = {
     "in_lvl_card_ids": [
         {
             "type": "ace",
-            "count": 14
+            "count": 8
         },
         {
             "type": "K",
-            "count": 16
+            "count": 10
+        },
+        {
+            "type": "Q",
+            "count": 12
         }
     ]
 }

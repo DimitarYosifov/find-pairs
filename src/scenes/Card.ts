@@ -27,8 +27,8 @@ export class Card extends Container {
         this.card.buttonMode = true;
     }
 
-    public flip(type: string): void {
-        this.type = type;
+    public flip(): void {
+        // this.type = type;
         let startScale = this.card.scale.x;
         let startedFlippling = false;
 
@@ -39,7 +39,7 @@ export class Card extends Container {
                 onUpdate: () => {
                     if (flipTween.progress() > 0.4 && !startedFlippling) {
                         startedFlippling = true;
-                        this.card.texture = Texture.from(this.state === "hidden" ? "cardBack" : type);
+                        this.card.texture = Texture.from(this.state === "hidden" ? "cardBack" : this.type);
                     }
                 },
                 onComplete: () => { },
