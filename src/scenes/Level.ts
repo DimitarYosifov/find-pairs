@@ -1,5 +1,5 @@
 import { IScene, App } from "../App";
-import { Container, Text, TextStyle } from "pixi.js";
+import { Container, Sprite, Text, TextStyle } from "pixi.js";
 import gsap from "gsap";
 import { Card } from "./Card";
 import { lvl1 } from "./../levels/Level_1_config";
@@ -22,6 +22,7 @@ export class Level extends Container implements IScene {
         super();
         this.currentLevel = lvl1;
         this.currentLevel.validate();
+        this.addBG();
         let columns = this.currentLevel.dimentions[0].length;
         this.totalCardFieldsCount = this.currentLevel.totalCardFieldsCount();
         for (let index = 0; index < this.totalCardFieldsCount; index++) {
@@ -107,9 +108,6 @@ export class Level extends Container implements IScene {
         this.createCounters();
         this.startCounter();
         this.addTimeLeft();
-
-
-
     }
 
     private getType(): string {
@@ -155,8 +153,8 @@ export class Level extends Container implements IScene {
 
         this.counter = new Text(this.time, style);
         this.counter.anchor.set(0.5);
-        this.counter.style.fontSize = Math.ceil(66);
-        this.counter.position.set(270, 50);
+        this.counter.style.fontSize = Math.ceil(44);
+        this.counter.position.set(50, 50);
         this.addChild(this.counter);
     }
 
@@ -241,14 +239,19 @@ export class Level extends Container implements IScene {
         this.timeLeft = this.currentLevel.completionTime;
         this.timeLeftCounter = new Text(this.timeLeft, style);
         this.timeLeftCounter.anchor.set(0.5);
-        this.timeLeftCounter.style.fontSize = Math.ceil(66);
-        this.timeLeftCounter.position.set(470, 50);
+        this.timeLeftCounter.style.fontSize = Math.ceil(44);
+        this.timeLeftCounter.position.set(900, 50);
         this.addChild(this.timeLeftCounter);
         update();
     }
 
     public addBG() {
-
+        let bg = Sprite.from("bg");
+        // bg.anchor.set(0.5);
+        // bg.scale.set(0.25);
+        bg.width = 960;
+        bg.height = 540;
+        this.addChild(bg);
     }
 
     public update(time: number): void {
