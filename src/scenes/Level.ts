@@ -7,7 +7,7 @@ import { config } from "../MainGameConfig";
 
 export class Level extends Container implements IScene {
 
-    private allCards: Card[] = [];
+    private allCards: (Card | null)[] = [];
     private cardsSelected: Card[] = [];
     private currentLevel: typeof lvl1;
     private counter: Text;
@@ -15,18 +15,33 @@ export class Level extends Container implements IScene {
     private timeLeft: number;
     private counterDelayedCall: gsap.core.Tween;
     private timeLeftCounter: Text;
+    private cardsContainer: Container = new Container;
+    private totalCardFieldsCount: number;
 
     constructor() {
         super();
         this.currentLevel = lvl1;
-        for (let index = 0; index < this.currentLevel.cardsCount; index++) {
+        this.currentLevel.validate();
+        let columns = this.currentLevel.dimentions[0].length;
+        this.totalCardFieldsCount = this.currentLevel.totalCardFieldsCount();
+        for (let index = 0; index < this.totalCardFieldsCount; index++) {
+
+            let row = Math.floor(index / columns);
+            let col = index % columns;
+
+            if (this.currentLevel.dimentions[row][col] !== 1) {
+                this.allCards.push(null);
+                continue;
+            }
+
+
             let type = this.getType();
             let card = new Card();
             card.type = type;
             this.allCards.push(card);
-            card.x = (100 * (index % 5)) + card.width / 2;
-            card.y = (100 + 100 * (Math.floor(index / 5))) + card.height / 2;
-            this.addChild(card);
+            card.x = (75 * (index % columns)) + card.width / 2;
+            card.y = (100 * (Math.floor(index / columns))) + card.height / 2;
+            this.cardsContainer.addChild(card);
             card.card.on('pointerdown', () => {
                 this.cardsSelected.push(card);
                 this.setInteactive(false);
@@ -85,9 +100,16 @@ export class Level extends Container implements IScene {
                 }
             });
         }
+
+        this.cardsContainer.x = App.width / 2 - this.cardsContainer.width / 2;
+        this.cardsContainer.y = App.height / 2 - this.cardsContainer.height / 2;
+        this.addChild(this.cardsContainer);
         this.createCounters();
         this.startCounter();
         this.addTimeLeft();
+
+
+
     }
 
     private getType(): string {
@@ -106,13 +128,19 @@ export class Level extends Container implements IScene {
     }
 
     private setInteactive(interactive: boolean): void {
-        for (let index = 0; index < this.currentLevel.cardsCount; index++) {
-            if (interactive === false || this.allCards[index].state === "open") {
-                this.allCards[index].card.buttonMode = false;
-                this.allCards[index].card.interactive = false;
+        let totalCardFieldsCount = this.currentLevel.totalCardFieldsCount();
+        for (let index = 0; index < this.totalCardFieldsCount; index++) {
+
+            if (!this.allCards[index]) {
+                continue;
+            }
+
+            if (interactive === false || this.allCards[index]!.state === "open") {
+                this.allCards[index]!.card.buttonMode = false;
+                this.allCards[index]!.card.interactive = false;
             } else {
-                this.allCards[index].card.buttonMode = this.allCards[index].state !== "success";
-                this.allCards[index].card.interactive = this.allCards[index].state !== "success";
+                this.allCards[index]!.card.buttonMode = this.allCards[index]!.state !== "success";
+                this.allCards[index]!.card.interactive = this.allCards[index]!.state !== "success";
             }
         }
     }
@@ -210,7 +238,7 @@ export class Level extends Container implements IScene {
             stroke: '#000000',
             strokeThickness: 2
         });
-        this.timeLeft = config.completionTime;
+        this.timeLeft = this.currentLevel.completionTime;
         this.timeLeftCounter = new Text(this.timeLeft, style);
         this.timeLeftCounter.anchor.set(0.5);
         this.timeLeftCounter.style.fontSize = Math.ceil(66);

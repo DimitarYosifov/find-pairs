@@ -5,6 +5,11 @@
   "savePath": "C:\\projects\\sideProjects-educational\\find-pairs\\static\\assets",
   "images": [
     {
+      "name": "J.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/J.png",
+      "folder": ""
+    },
+    {
       "name": "K.png",
       "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/K.png",
       "folder": ""
