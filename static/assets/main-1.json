@@ -1,23 +1,23 @@
 {
   "frames": {
-    "bg": {
+    "curtains": {
       "frame": {
         "x": 0,
         "y": 0,
-        "w": 612,
-        "h": 357
+        "w": 708,
+        "h": 1160
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 612,
-        "h": 357
+        "x": 9,
+        "y": 13,
+        "w": 708,
+        "h": 1160
       },
       "sourceSize": {
-        "w": 612,
-        "h": 357
+        "w": 730,
+        "h": 1180
       },
       "pivot": {
         "x": 0.5,
@@ -26,12 +26,12 @@
     },
     "J": {
       "frame": {
-        "x": 612,
-        "y": 0,
+        "x": 0,
+        "y": 1160,
         "w": 264,
         "h": 374
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": false,
       "spriteSourceSize": {
         "x": 0,
@@ -50,12 +50,12 @@
     },
     "ace": {
       "frame": {
-        "x": 986,
-        "y": 0,
+        "x": 0,
+        "y": 1534,
         "w": 259,
         "h": 370
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 0,
@@ -74,12 +74,12 @@
     },
     "K": {
       "frame": {
-        "x": 1356,
-        "y": 0,
+        "x": 259,
+        "y": 1534,
         "w": 251,
         "h": 365
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 7,
@@ -96,10 +96,34 @@
         "y": 0.5
       }
     },
+    "cardBack": {
+      "frame": {
+        "x": 264,
+        "y": 1160,
+        "w": 247,
+        "h": 365
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 10,
+        "y": 5,
+        "w": 247,
+        "h": 365
+      },
+      "sourceSize": {
+        "w": 264,
+        "h": 374
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
     "Q": {
       "frame": {
-        "x": 1721,
-        "y": 0,
+        "x": 510,
+        "y": 1525,
         "w": 250,
         "h": 364
       },
@@ -120,24 +144,24 @@
         "y": 0.5
       }
     },
-    "cardBack": {
+    "bg": {
       "frame": {
-        "x": 1356,
-        "y": 251,
-        "w": 247,
-        "h": 365
+        "x": 511,
+        "y": 1160,
+        "w": 200,
+        "h": 357
       },
-      "rotated": true,
-      "trimmed": true,
+      "rotated": false,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 10,
-        "y": 5,
-        "w": 247,
-        "h": 365
+        "x": 0,
+        "y": 0,
+        "w": 200,
+        "h": 357
       },
       "sourceSize": {
-        "w": 264,
-        "h": 374
+        "w": 200,
+        "h": 357
       },
       "pivot": {
         "x": 0.5,
@@ -151,8 +175,8 @@
     "image": "main-1.png",
     "format": "RGBA8888",
     "size": {
-      "w": 1971,
-      "h": 498
+      "w": 760,
+      "h": 1904
     },
     "scale": 1
   }

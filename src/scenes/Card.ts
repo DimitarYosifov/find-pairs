@@ -46,4 +46,25 @@ export class Card extends Container {
             }
         );
     }
+
+    public playCelebration(): void {
+        let w = this.card.width;
+        let h = this.card.height;
+        let tl = gsap.timeline();
+        tl.to(this.card, 0.15,
+            {
+                ease: "back.inOut",
+                width: w * 1.1,
+                height: h * 1.1
+            }
+        )
+        tl.to(this.card, 0.4,
+            {
+                ease: "back.inOut",
+                // delay:0.3,
+                width: 0,
+                height: 0
+            }
+        )
+    }
 }
