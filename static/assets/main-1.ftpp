@@ -5,8 +5,53 @@
   "savePath": "C:\\projects\\sideProjects-educational\\find-pairs\\static\\assets",
   "images": [
     {
+      "name": "2.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/2.png",
+      "folder": ""
+    },
+    {
+      "name": "3.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/3.png",
+      "folder": ""
+    },
+    {
+      "name": "4.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/4.png",
+      "folder": ""
+    },
+    {
+      "name": "5.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/5.png",
+      "folder": ""
+    },
+    {
+      "name": "6.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/6.png",
+      "folder": ""
+    },
+    {
+      "name": "7.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/7.png",
+      "folder": ""
+    },
+    {
+      "name": "8.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/8.png",
+      "folder": ""
+    },
+    {
+      "name": "9.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/9.png",
+      "folder": ""
+    },
+    {
       "name": "10.png",
       "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/10.png",
+      "folder": ""
+    },
+    {
+      "name": "A.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/A.png",
       "folder": ""
     },
     {
@@ -25,11 +70,6 @@
       "folder": ""
     },
     {
-      "name": "ace.png",
-      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/ace.png",
-      "folder": ""
-    },
-    {
       "name": "bg.jpg",
       "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/bg.jpg",
       "folder": ""
@@ -42,6 +82,11 @@
     {
       "name": "curtains.png",
       "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/curtains.png",
+      "folder": ""
+    },
+    {
+      "name": "star.png",
+      "path": "C:/projects/sideProjects-educational/find-pairs/images/main-1/star.png",
       "folder": ""
     }
   ],

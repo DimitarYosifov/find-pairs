@@ -4,8 +4,9 @@ import { IScene, App } from "../App";
 import gsap from "gsap";
 import { config } from "../MainGameConfig";
 import { Level } from "./Level";
+import { WebfontLoaderPlugin } from "pixi-webfont-loader";
 
-export class LoadingScene extends Container implements IScene {
+ export class LoadingScene extends Container implements IScene {
 
     private loaderBar: Container = new Container;
     private textsContainer: Container = new Container;
@@ -17,10 +18,17 @@ export class LoadingScene extends Container implements IScene {
     constructor() {
         super();
 
+        Loader.registerPlugin(WebfontLoaderPlugin);
         Loader.shared.add(assets);
+        Loader.shared.add({ name: "Risque-Regular", url: 'fonts/Risque-Regular.ttf' });
+
         Loader.shared.onProgress.add(this.downloadProgress, this);
         Loader.shared.onComplete.once(this.gameLoaded, this);
         Loader.shared.load();
+
+
+        console.log(Loader.shared);
+        
 
         this.loadBarGraphics();
         this.loadingTexts();

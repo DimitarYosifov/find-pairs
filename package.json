@@ -19,6 +19,7 @@
     "pixi-dragonbones": "^5.7.0-1",
     "pixi-filters": "^4.1.6",
     "pixi-particles": "^4.2.0",
+    "pixi-webfont-loader": "^1.0.3",
     "pixi.js": "^6.2.0"
   },
   "devDependencies": {

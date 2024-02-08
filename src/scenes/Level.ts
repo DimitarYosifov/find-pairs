@@ -1,5 +1,5 @@
 import { IScene, App } from "../App";
-import { Container, Sprite, Text, TextStyle, Texture } from "pixi.js";
+import { Container, Graphics, Sprite, Text, TextStyle, Texture } from "pixi.js";
 import gsap from "gsap";
 import { Card } from "./Card";
 import { lvl1 } from "./../levels/Level_1_config";
@@ -24,6 +24,12 @@ export class Level extends Container implements IScene {
     private curtainsTweens: GSAPTween[] = [];
     private levelPassed: boolean = false;
     private totalCardsToFlip: number;
+    private loaderBarBorder: Graphics = new Graphics;
+    private loaderBarFill: Graphics = new Graphics;
+    private loaderBar: Container = new Container;
+    private initialCardsCount: number;
+    private levelStarsArray: Sprite[] = [];
+    private starsEarned: number = 0;
 
     constructor() {
         super();
@@ -33,6 +39,7 @@ export class Level extends Container implements IScene {
         let columns = this.currentLevel.dimentions[0].length;
         this.totalCardFieldsCount = this.currentLevel.dimentions[0].length * lvl1.dimentions.length;
         this.totalCardsToFlip = this.currentLevel.in_lvl_card_ids.map(x => x.count).reduce((a, b) => a + b);
+        this.initialCardsCount = this.totalCardsToFlip;
         for (let index = 0; index < this.totalCardFieldsCount; index++) {
 
             let row = Math.floor(index / columns);
@@ -60,7 +67,7 @@ export class Level extends Container implements IScene {
                     this.updateMoves();
                     this.setInteactive(false);
                     this.counter.visible = false;
-                    gsap.killTweensOf(this.updateCounter)
+                    gsap.killTweensOf(this.updateCounter);
                     if (this.cardsSelected[0].type === this.cardsSelected[1].type) {
                         //success
                         gsap.delayedCall(config.cardFlipDuration * 1.1, () => {
@@ -71,6 +78,8 @@ export class Level extends Container implements IScene {
 
                             this.cardsSelected = [];
                             this.totalCardsToFlip -= 2;
+
+                            this.updateLevelProgress();
 
                             if (this.totalCardsToFlip === 0) {
                                 this.levelPassed = true;
@@ -115,6 +124,8 @@ export class Level extends Container implements IScene {
         this.startCounter();
         this.addTimeLeft();
         this.addMoves();
+        this.levelProgress();
+        this.levelStars();
     }
 
     private addCurtains(): void {
@@ -421,5 +432,89 @@ export class Level extends Container implements IScene {
             alert("cards defined in dimention arrays do not match cards count");
 
         }
+    }
+
+    private levelProgress(): void {
+
+        this.loaderBarBorder.beginFill(0x000000, 1);
+        this.loaderBarBorder.drawRoundedRect(0, 0, App.width * 0.8, 20, 11);
+        this.loaderBarBorder.endFill();
+
+        this.loaderBarFill.beginFill(0xebad1e, 1);// yellow 
+        this.loaderBarFill.drawRoundedRect(0, 0, App.width * 0.5, 20, 11);
+        this.loaderBarFill.alpha = 0;
+
+        this.loaderBar.addChild(this.loaderBarBorder);
+        this.loaderBar.addChild(this.loaderBarFill);
+        this.loaderBar.position.x = (App.width - this.loaderBar.width) / 2;
+        this.loaderBar.position.y = (App.height - this.loaderBar.height) * 0.97;
+        this.addChild(this.loaderBar);
+    }
+
+    private updateLevelProgress(): void {
+        let cardsLeft = this.totalCardsToFlip;
+        let progress = ((this.initialCardsCount - cardsLeft) / this.initialCardsCount).toFixed(2);
+
+        let ease = "back.in";
+        if (this.initialCardsCount - 2 === this.totalCardsToFlip) {
+            this.loaderBarFill.width = 0;
+            ease = "linear"
+        }
+        this.loaderBarFill.alpha = 1;
+        gsap.to(this.loaderBarFill, 0.45,
+            {
+                ease: ease,
+                width: App.width * 0.8 * +progress
+            }
+        )
+
+        if (+progress >= this.currentLevel.starsLevels[this.starsEarned] / 100) {
+            this.updateStars();
+        }
+    }
+
+    private levelStars(): void {
+
+        let h = this.loaderBar.height / 2;
+
+        this.currentLevel.starsLevels.forEach(starLvl => {
+            let star = Sprite.from("star");
+            star.anchor.set(0.5);
+            star.scale.set(0.2);
+            star.alpha = 0.55;
+            star.position.set(this.loaderBar.width * starLvl / 100, h);
+            this.loaderBar.addChild(star);
+            this.levelStarsArray.push(star);
+        });
+
+    }
+
+    private updateStars(): void {
+        let target = this.levelStarsArray[this.starsEarned];
+        let startScale = target.scale.x;
+        target.alpha = 1;
+        let tl = gsap.timeline();
+        tl.to(target.scale, 0.45,
+            {
+                // delay: 0.2,
+                ease: "back.in",
+                x: startScale * 1.6,
+                y: startScale * 1.6,
+                // onStart: () => {
+                //     target.alpha = 1;
+                // }
+            }
+        )
+        tl.to(target.scale, 0.45,
+            {
+                ease: "back.out",
+                x: startScale * 1.2,
+                y: startScale * 1.2,
+                // onStart: () => {
+                //     target.alpha = 1;
+                // }
+            }
+        )
+        this.starsEarned++;
     }
 }
