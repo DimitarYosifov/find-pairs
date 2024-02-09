@@ -1,5 +1,5 @@
 import { App } from './App';
-import { LoadingScene } from './scenes/LoadingScene';
+import { LoadingScene } from './scenes/loading/LoadingScene';
 import './css/style';
 
 window.onload = () => {

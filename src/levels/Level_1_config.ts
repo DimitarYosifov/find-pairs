@@ -14,7 +14,7 @@ export const lvl1 = {
     ],
     "completionTime": 60,
     "moves": 33,
-    "starsLevels": [60, 85, 100],
+    "starsLevels": [60, 80, 100],
     "in_lvl_card_ids": [
         {
             "type": "A",

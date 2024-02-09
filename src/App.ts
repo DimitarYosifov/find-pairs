@@ -1,6 +1,6 @@
 import { Application, DisplayObject, utils } from "pixi.js";
 import gsap from "gsap";
-import { Level } from "./scenes/Level";
+import { Level } from "./scenes/level/Level";
 
 export class App {
 

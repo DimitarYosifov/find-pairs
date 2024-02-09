@@ -1,11 +1,11 @@
 import { Container, Graphics, Loader, Text, TextStyle } from "pixi.js";
-import { assets } from "../Assets";
-import { IScene, App } from "../App";
+import { assets } from "../../Assets";
+import { IScene, App } from "../../App";
 import gsap from "gsap";
-import { config } from "../MainGameConfig";
-import { Level } from "./Level";
+import { config } from "../../MainGameConfig";
+import { Level } from "../level/Level";
 import { WebfontLoaderPlugin } from "pixi-webfont-loader";
-
+import { WorldMap } from "../worldMap/WorldMap";
  export class LoadingScene extends Container implements IScene {
 
     private loaderBar: Container = new Container;
@@ -86,7 +86,8 @@ import { WebfontLoaderPlugin } from "pixi-webfont-loader";
         App.removeScene(this);
         gsap.delayedCall(0.01, () => {
             App.fade(0, 1).then(() => { 
-                App.setScene(new Level())
+                // App.setScene(new Level());
+                App.setScene(new WorldMap());
             });
         })
     }

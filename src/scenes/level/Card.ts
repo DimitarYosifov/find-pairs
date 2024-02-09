@@ -1,6 +1,6 @@
 import { Container, Sprite, Texture } from "pixi.js";
 import gsap from "gsap";
-import { config } from "../MainGameConfig";
+import { config } from "../../MainGameConfig";
 
 export class Card extends Container {
 

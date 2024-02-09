@@ -1,9 +1,9 @@
-import { IScene, App } from "../App";
+import { IScene, App } from "../../App";
 import { Container, Graphics, Sprite, Text, TextStyle, Texture } from "pixi.js";
 import gsap from "gsap";
 import { Card } from "./Card";
-import { lvl1 } from "./../levels/Level_1_config";
-import { config } from "../MainGameConfig";
+import { lvl1 } from "../../levels/Level_1_config";
+import { config } from "../../MainGameConfig";
 
 export class Level extends Container implements IScene {
 
@@ -414,8 +414,6 @@ export class Level extends Container implements IScene {
 
     public addBG() {
         let bg = Sprite.from("bg");
-        // bg.anchor.set(0.5);
-        // bg.scale.set(0.25);
         bg.width = 540;
         bg.height = 960;
         this.addChild(bg);
