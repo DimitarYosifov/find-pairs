@@ -1,9 +1,10 @@
 import { IScene, App } from "../../App";
-import { Container, Graphics, Sprite, Text, TextStyle, Texture } from "pixi.js";
+import { Container, Graphics, ParticleContainer, Sprite, Text, TextStyle, Texture } from "pixi.js";
 import gsap from "gsap";
 import { Card } from "./Card";
 import { lvl1 } from "../../levels/Level_1_config";
 import { config } from "../../MainGameConfig";
+import { Emitter, EmitterConfig } from "pixi-particles";
 
 export class Level extends Container implements IScene {
 
@@ -30,6 +31,7 @@ export class Level extends Container implements IScene {
     private initialCardsCount: number;
     private levelStarsArray: Sprite[] = [];
     private starsEarned: number = 0;
+    private emitters: Emitter[] = [];
 
     constructor() {
         super();
@@ -58,6 +60,10 @@ export class Level extends Container implements IScene {
             card.y = (100 * (Math.floor(index / columns))) + card.height / 2;
             this.cardsContainer.addChild(card);
             card.card.on('pointerdown', () => {
+
+                //test
+                // this.particles(card.x, card.y, card.width, card.height);
+
                 this.cardsSelected.push(card);
                 this.setInteactive(false);
                 card.state = "open";
@@ -71,9 +77,20 @@ export class Level extends Container implements IScene {
                     if (this.cardsSelected[0].type === this.cardsSelected[1].type) {
                         //success
                         gsap.delayedCall(config.cardFlipDuration * 1.1, () => {
+
                             this.cardsSelected.forEach(card => {
                                 card.state = "success";
                                 card.playCelebration();
+                            });
+
+                            this.cardsSelected.forEach(c => {
+                                const x = c.x;
+                                const y = c.y;
+                                const w = c.width;
+                                const h = c.height;
+                                gsap.delayedCall(0.4, () => {
+                                    this.particles(x, y, w, h);
+                                })
                             });
 
                             this.cardsSelected = [];
@@ -419,8 +436,6 @@ export class Level extends Container implements IScene {
         this.addChild(bg);
     }
 
-    public update(time: number): void { }
-
     private validateLevel(): void {
         let totalCards = this.currentLevel.dimentions.map(x => x.filter(e => e === 1).length).reduce((a, b) => a + b);
         let totalCardIds = this.currentLevel.in_lvl_card_ids.map(x => x.count).reduce((a, b) => a + b);
@@ -514,5 +529,82 @@ export class Level extends Container implements IScene {
             }
         )
         this.starsEarned++;
+    }
+
+    private particles(x: number, y: number, width: number, height: number) {
+
+        let cfg = {
+            "alpha": {
+                "start": 1,
+                "end": 0.15
+            },
+            "scale": {
+                "start": 0.03,
+                "end": 0.005
+            },
+            // "color": {
+            //     "start": "#6c6c6c",
+            //     "end": "#ababab"
+            // },
+            "speed": {
+                "start": 0,
+                "end": 0
+            },
+            "startRotation": {
+                "min": 0,
+                "max": 360
+            },
+            "rotationSpeed": {
+                "min": 0,
+                "max": 360
+            },
+            "lifetime": {
+                "min": 0.1,
+                "max": 1.25
+            },
+            "blendMode": "normal",
+            "frequency": 0.0005,
+            "emitterLifetime": 0,
+            "maxParticles": 75,
+            "pos": {
+                "x": width / -2.9,// App.width * 0.5,
+                "y": height / 2.4,// App.height * 0.5
+            },
+            "addAtBack": false,
+            "spawnType": "rect",
+            "spawnRect": {
+                "x": x,
+                "y": y,
+                "w": width,
+                "h": height
+            }
+        }
+
+        let container = new ParticleContainer;
+        // this.addChild(container)
+        this.addChildAt(container, 1)
+        let starEmitter: Emitter = new Emitter(
+            container,
+            [Texture.from("star")],
+            cfg
+        );
+        starEmitter.emit = true;
+        this.emitters.push(starEmitter);
+        gsap.delayedCall(0.15, () => {
+            starEmitter.emit = false;
+            gsap.delayedCall(2, () => {
+                starEmitter.destroy();
+                starEmitter.cleanup();
+                starEmitter.update = (): void => { };
+            });
+        });
+    }
+
+    public update(time: number): void {
+        this.emitters.forEach((emitter) => {
+            if (emitter.parent) {
+                emitter.update((time * 0.01))
+            }
+        });
     }
 }
